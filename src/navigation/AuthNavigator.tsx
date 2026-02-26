@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  ActivityIndicator,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { ActivityIndicator, StatusBar, StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { enableScreens } from 'react-native-screens';
@@ -55,24 +51,25 @@ export function AuthNavigator() {
   // User exists → Home; otherwise → Login/Signup flow
   return (
     <NavigationContainer>
+      <StatusBar barStyle={'dark-content'} />
       <Stack.Navigator>
         {user != null ? (
           <Stack.Screen
             name="Home"
             component={HomeScreen}
-            options={{ title: 'Home' }}
+            options={{ headerShown: false }}
           />
         ) : (
           <>
             <Stack.Screen
               name="Login"
               component={LoginScreen}
-              options={{ title: 'Login' }}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="Signup"
               component={SignupScreen}
-              options={{ title: 'Sign up' }}
+              options={{ headerShown: false }}
             />
           </>
         )}
@@ -80,4 +77,3 @@ export function AuthNavigator() {
     </NavigationContainer>
   );
 }
-
