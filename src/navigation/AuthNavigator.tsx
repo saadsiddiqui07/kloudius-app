@@ -1,4 +1,9 @@
 import React from 'react';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  View,
+} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { enableScreens } from 'react-native-screens';
@@ -18,13 +23,37 @@ export type RootStackParamList = {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+function LoadingScreen() {
+  return (
+    <View style={styles.loading}>
+      <ActivityIndicator size="large" />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+
 export function AuthNavigator() {
-  const { isAuthenticated } = useAuth();
+  const { user, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <NavigationContainer>
+        <LoadingScreen />
+      </NavigationContainer>
+    );
+  }
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {isAuthenticated ? (
+        {user != null ? (
           <Stack.Screen
             name="Home"
             component={HomeScreen}
