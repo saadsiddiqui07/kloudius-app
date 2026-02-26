@@ -1,9 +1,13 @@
-import React from 'react';
-import { ActivityIndicator, StatusBar, StyleSheet, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import React, { useMemo } from 'react';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import {
+  DefaultTheme,
+  NavigationContainer,
+} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { enableScreens } from 'react-native-screens';
 
+import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { HomeScreen } from '../../screens/HomeScreen';
 import { LoginScreen } from '../../screens/LoginScreen';
@@ -21,9 +25,17 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 /** Shown while restoring session from AsyncStorage (splash/loading state). */
 function SplashScreen() {
+  const { colors } = useTheme();
+  const splashStyle = useMemo(
+    () => [
+      styles.splash,
+      { backgroundColor: colors.background },
+    ],
+    [colors.background],
+  );
   return (
-    <View style={styles.splash}>
-      <ActivityIndicator size="large" />
+    <View style={splashStyle}>
+      <ActivityIndicator size="large" color={colors.primary} />
     </View>
   );
 }
@@ -38,11 +50,29 @@ const styles = StyleSheet.create({
 
 export function AuthNavigator() {
   const { user, isLoading } = useAuth();
+  const { colors, isDark } = useTheme();
+
+  const navTheme = React.useMemo(
+    () => ({
+      ...DefaultTheme,
+      dark: isDark,
+      colors: {
+        ...DefaultTheme.colors,
+        primary: colors.primary,
+        background: colors.background,
+        card: colors.background,
+        text: colors.text,
+        border: colors.border,
+        notification: colors.primary,
+      },
+    }),
+    [isDark, colors],
+  );
 
   // Splash/loading state while restoring session from AsyncStorage
   if (isLoading) {
     return (
-      <NavigationContainer>
+      <NavigationContainer theme={navTheme}>
         <SplashScreen />
       </NavigationContainer>
     );
@@ -50,9 +80,13 @@ export function AuthNavigator() {
 
   // User exists → Home; otherwise → Login/Signup flow
   return (
-    <NavigationContainer>
-      <StatusBar barStyle={'dark-content'} />
-      <Stack.Navigator>
+    <NavigationContainer theme={navTheme}>
+      <Stack.Navigator
+        screenOptions={{
+          contentStyle: { backgroundColor: 'transparent' },
+          animation: 'fade',
+        }}
+      >
         {user != null ? (
           <Stack.Screen
             name="Home"

@@ -4,16 +4,14 @@ import { StyleSheet, View } from 'react-native';
 import type { ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { colors, spacing } from '../theme';
+import { useTheme } from '../context/ThemeContext';
+import { spacing } from '../theme';
 
 type ScreenContainerProps = {
   children: ReactNode;
   style?: ViewStyle;
-  /** Extra horizontal padding (default: theme spacing.screen) */
   horizontalPadding?: number;
-  /** Extra top padding below safe area (default: theme spacing) */
   topPadding?: number;
-  /** Extra bottom padding above safe area (default: theme spacing) */
   bottomPadding?: number;
 };
 
@@ -24,12 +22,18 @@ export function ScreenContainer({
   topPadding = spacing.xxl,
   bottomPadding = spacing.xxl,
 }: ScreenContainerProps) {
+  const { colors } = useTheme();
   const insets = useSafeAreaInsets();
+
+  const containerStyle = React.useMemo(
+    () => [{ backgroundColor: colors.background }, styles.container],
+    [colors.background],
+  );
 
   return (
     <View
       style={[
-        styles.container,
+        containerStyle,
         {
           paddingTop: insets.top + topPadding,
           paddingBottom: insets.bottom + bottomPadding,
@@ -47,6 +51,5 @@ export function ScreenContainer({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
   },
 });

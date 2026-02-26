@@ -1,17 +1,48 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { AppButton } from '../src/components/AppButton';
 import { ScreenContainer } from '../src/components/ScreenContainer';
 import { useAuth } from '../src/context/AuthContext';
-import { colors, fontSize, fontWeight, spacing } from '../src/theme';
+import { useTheme } from '../src/context/ThemeContext';
+import { fontSize, fontWeight, spacing } from '../src/theme';
 
 export function HomeScreen() {
+  const { colors } = useTheme();
   const { user, logout, isAuthenticating } = useAuth();
 
   const handleLogout = useCallback(async () => {
     await logout();
   }, [logout]);
+
+  const styles = useMemo(
+    () =>
+      StyleSheet.create({
+        content: {
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingHorizontal: spacing.xl,
+        },
+        welcome: {
+          fontSize: fontSize.title2,
+          fontWeight: fontWeight.bold,
+          color: colors.text,
+          textAlign: 'center',
+          marginBottom: spacing.sm,
+        },
+        email: {
+          fontSize: fontSize.body,
+          color: colors.textSecondary,
+          textAlign: 'center',
+          marginBottom: spacing.xxl,
+        },
+        logoutButton: {
+          minWidth: 180,
+        },
+      }),
+    [colors],
+  );
 
   if (user == null) {
     return null;
@@ -34,28 +65,3 @@ export function HomeScreen() {
     </ScreenContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: spacing.xl,
-  },
-  welcome: {
-    fontSize: fontSize.headline,
-    fontWeight: fontWeight.bold,
-    color: colors.text,
-    textAlign: 'center',
-    marginBottom: spacing.sm,
-  },
-  email: {
-    fontSize: fontSize.body,
-    color: colors.textSecondary,
-    textAlign: 'center',
-    marginBottom: spacing.xxl,
-  },
-  logoutButton: {
-    minWidth: 160,
-  },
-});

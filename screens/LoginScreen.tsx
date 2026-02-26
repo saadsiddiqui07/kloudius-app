@@ -15,8 +15,9 @@ import { AppInput } from '../src/components/AppInput';
 import { ErrorText } from '../src/components/ErrorText';
 import { ScreenContainer } from '../src/components/ScreenContainer';
 import { useAuth } from '../src/context/AuthContext';
+import { useTheme } from '../src/context/ThemeContext';
 import type { RootStackParamList } from '../src/navigation/AuthNavigator';
-import { colors, fontSize, spacing } from '../src/theme';
+import { fontSize, fontWeight, spacing } from '../src/theme';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -24,6 +25,7 @@ type LoginNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Login'
 
 export function LoginScreen() {
   const navigation = useNavigation<LoginNavigationProp>();
+  const { colors } = useTheme();
   const { login, isAuthenticating, authError, clearAuthError } = useAuth();
 
   const [email, setEmail] = useState('');
@@ -65,6 +67,50 @@ export function LoginScreen() {
     clearAuthError();
     navigation.navigate('Signup');
   }, [navigation, clearAuthError]);
+
+  const styles = React.useMemo(
+    () =>
+      StyleSheet.create({
+        keyboardView: { flex: 1 },
+        scrollContent: {
+          flexGrow: 1,
+          paddingTop: spacing.xxl,
+        },
+        title: {
+          fontSize: fontSize.title2,
+          fontWeight: fontWeight.bold,
+          color: colors.text,
+          marginBottom: spacing.sm,
+        },
+        subtitle: {
+          fontSize: fontSize.body,
+          color: colors.textSecondary,
+          marginBottom: spacing.xxl,
+        },
+        authError: { marginBottom: spacing.md },
+        submitButton: {
+          marginTop: spacing.sm,
+          marginBottom: spacing.xl,
+        },
+        signupRow: {
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingVertical: spacing.md,
+        },
+        signupRowPressed: { opacity: 0.7 },
+        signupPrompt: {
+          fontSize: fontSize.body,
+          color: colors.textSecondary,
+        },
+        signupLink: {
+          fontSize: fontSize.body,
+          fontWeight: fontWeight.semibold,
+          color: colors.primary,
+        },
+      }),
+    [colors],
+  );
 
   return (
     <ScreenContainer>
@@ -136,49 +182,3 @@ export function LoginScreen() {
     </ScreenContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  keyboardView: {
-    flex: 1,
-  },
-  scrollContent: {
-    flexGrow: 1,
-    paddingTop: spacing.xxl,
-  },
-  title: {
-    fontSize: fontSize.headline,
-    fontWeight: '700',
-    color: colors.text,
-    marginBottom: spacing.sm,
-  },
-  subtitle: {
-    fontSize: fontSize.body,
-    color: colors.textSecondary,
-    marginBottom: spacing.xxl,
-  },
-  authError: {
-    marginBottom: spacing.md,
-  },
-  submitButton: {
-    marginTop: spacing.sm,
-    marginBottom: spacing.xl,
-  },
-  signupRow: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: spacing.md,
-  },
-  signupRowPressed: {
-    opacity: 0.7,
-  },
-  signupPrompt: {
-    fontSize: fontSize.body,
-    color: colors.textSecondary,
-  },
-  signupLink: {
-    fontSize: fontSize.body,
-    fontWeight: '600',
-    color: colors.primary,
-  },
-});

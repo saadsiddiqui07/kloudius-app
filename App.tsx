@@ -1,20 +1,32 @@
 import React from 'react';
-import { StatusBar, useColorScheme } from 'react-native';
+import { StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { ThemeProvider, useTheme } from './src/context/ThemeContext';
 import { AuthNavigator } from './src/navigation/AuthNavigator';
 import { AuthProvider } from './src/context/AuthContext';
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
+function AppContent() {
+  const { isDark } = useTheme();
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+    <>
+      <StatusBar
+        barStyle={isDark ? 'light-content' : 'dark-content'}
+        backgroundColor="transparent"
+      />
       <AuthProvider>
-        {/* Navigation: user ? Home : Login/Signup; splash shown while restoring session */}
         <AuthNavigator />
       </AuthProvider>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <SafeAreaProvider>
+      <ThemeProvider>
+        <AppContent />
+      </ThemeProvider>
     </SafeAreaProvider>
   );
 }
