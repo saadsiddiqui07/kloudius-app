@@ -23,16 +23,17 @@ export type RootStackParamList = {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-function LoadingScreen() {
+/** Shown while restoring session from AsyncStorage (splash/loading state). */
+function SplashScreen() {
   return (
-    <View style={styles.loading}>
+    <View style={styles.splash}>
       <ActivityIndicator size="large" />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  loading: {
+  splash: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -42,14 +43,16 @@ const styles = StyleSheet.create({
 export function AuthNavigator() {
   const { user, isLoading } = useAuth();
 
+  // Splash/loading state while restoring session from AsyncStorage
   if (isLoading) {
     return (
       <NavigationContainer>
-        <LoadingScreen />
+        <SplashScreen />
       </NavigationContainer>
     );
   }
 
+  // User exists → Home; otherwise → Login/Signup flow
   return (
     <NavigationContainer>
       <Stack.Navigator>

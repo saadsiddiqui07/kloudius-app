@@ -12,6 +12,7 @@ function App() {
     <SafeAreaProvider>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <AuthProvider>
+        {/* Navigation: user ? Home : Login/Signup; splash shown while restoring session */}
         <AuthNavigator />
       </AuthProvider>
     </SafeAreaProvider>
