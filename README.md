@@ -1,98 +1,180 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 🔐 User Authentication App (React Native CLI)
 
-# Getting Started
+A clean, production-style React Native authentication app built using **React Context API** for state management and **React Navigation** for routing.
+This project demonstrates a complete authentication flow with session persistence and scalable architecture.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+---
 
-## Step 1: Start Metro
+## 🚀 Setup Instructions
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+### 1️⃣ Clone the Repository
 
-To start the Metro dev server, run the following command from the root of your React Native project:
-
-```sh
-# Using npm
-npm start
-
-# OR using Yarn
-yarn start
+```bash
+git clone <your-repo-url>
+cd <project-name>
 ```
 
-## Step 2: Build and run your app
+### 2️⃣ Install Dependencies
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+```bash
+npm install
 ```
 
-### iOS
+### 3️⃣ Install iOS Pods (iOS Only)
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+```bash
+cd ios
+pod install
+cd ..
 ```
 
-Then, and every time you update your native dependencies, run:
+### 4️⃣ Run the App
 
-```sh
-bundle exec pod install
+**Android**
+
+```bash
+npx react-native run-android
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+**iOS**
 
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+```bash
+npx react-native run-ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+---
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## 🏗️ Architecture Overview
 
-## Step 3: Modify your app
+This app follows a **simple scalable architecture** commonly used in production React Native apps.
 
-Now that you have successfully run the app, let's make changes!
+### 🔹 State Management — Context API
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+The authentication state is managed globally using a custom `AuthContext`.
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+It provides:
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+* `user` → Current logged-in user
+* `login(email, password)`
+* `signup(name, email, password)`
+* `logout()`
+* `loading` → Session restoration state
 
-## Congratulations! :tada:
+This avoids prop-drilling and keeps authentication logic centralized.
 
-You've successfully run and modified your React Native App. :partying_face:
+---
 
-### Now what?
+### 🔹 Navigation Flow
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+Navigation is conditionally rendered based on authentication state:
 
-# Troubleshooting
+```
+If user exists:
+   → Home Screen
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+If user is null:
+   → Login Screen
+   → Signup Screen
+```
 
-# Learn More
+This ensures protected routing without needing complex guards.
 
-To learn more about React Native, take a look at the following resources:
+---
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
-# kloudius-app
+## ✨ Features Implemented
+
+✅ Login & Signup Flow
+✅ Global Authentication State (Context API)
+✅ Form Validation with Error Messages
+✅ Session Persistence using AsyncStorage
+✅ Auto-login after app restart
+✅ Logout Functionality
+✅ Conditional Navigation
+✅ Reusable UI Components
+✅ Clean & Professional UI
+✅ Smooth Animations using React Native Animated API
+✅ Password Visibility Toggle (Bonus)
+
+---
+
+## 📁 Folder Structure
+
+```
+src/
+ ├── components/        # Reusable UI components (Input, Button, etc.)
+ ├── context/           # AuthContext (global auth logic)
+ ├── navigation/        # Navigation configuration
+ ├── screens/           # App screens (Login, Signup, Home)
+ ├── styles/            # Global styling constants
+ └── utils/             # Helpers (validation, storage helpers)
+```
+
+This structure keeps logic separated and easy to scale.
+
+---
+
+## 💾 How Persistence Works
+
+Authentication state is persisted using **AsyncStorage**.
+
+### On Login / Signup:
+
+User object is saved:
+
+```js
+AsyncStorage.setItem('USER', JSON.stringify(user));
+```
+
+### On App Launch:
+
+The app checks storage:
+
+```js
+AsyncStorage.getItem('USER')
+```
+
+If found → restore session → user stays logged in.
+If not → show authentication flow.
+
+### On Logout:
+
+```js
+AsyncStorage.removeItem('USER');
+```
+
+This simulates real-world token/session persistence.
+
+---
+
+## 🎯 Design Philosophy
+
+The UI focuses on:
+
+* Minimal and modern layout
+* Consistent spacing system
+* Clear typography hierarchy
+* Smooth micro-interactions
+* Production-ready feel (not a demo UI)
+
+---
+
+## 📸 Demo
+
+(Add screenshots or a short recording here before submission.)
+
+---
+
+## ✅ What This Assignment Demonstrates
+
+* Understanding of authentication flows
+* Proper usage of React Context API
+* Navigation state control
+* Form handling & validation
+* Persistent login sessions
+* Clean architecture and reusable components
+
+---
+
+## 👨‍💻 Author
+
+Built as part of a React Native take-home assignment to showcase clean architecture, UI discipline, and real-world patterns.
