@@ -3,10 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { enableScreens } from 'react-native-screens';
 
-import { useAuth } from './AuthContext';
-import { HomeScreen } from './screens/HomeScreen';
-import { LoginScreen } from './screens/LoginScreen';
-import { SignupScreen } from './screens/SignupScreen';
+import { useAuth } from '../context/AuthContext';
+import { HomeScreen } from '../../screens/HomeScreen';
+import { LoginScreen } from '../../screens/LoginScreen';
+import { SignupScreen } from '../../screens/SignupScreen';
 
 enableScreens(true);
 

@@ -2,8 +2,8 @@ import React from 'react';
 import { StatusBar, useColorScheme } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { AuthNavigator } from './AuthNavigator';
-import { AuthProvider } from './AuthContext';
+import { AuthNavigator } from './src/navigation/AuthNavigator';
+import { AuthProvider } from './src/context/AuthContext';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
