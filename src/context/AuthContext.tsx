@@ -11,6 +11,9 @@ import React, {
 
 const AUTH_STORAGE_KEY = '@auth_user';
 
+/** In-memory fallback when AsyncStorage native module is unavailable (e.g. not rebuilt, tests). */
+let memoryFallback: string | null = null;
+
 export type User = {
   id: string;
   name: string;
@@ -44,19 +47,8 @@ function validatePassword(password: string): boolean {
   return typeof password === 'string' && password.length >= 6;
 }
 
-async function persistUser(user: User): Promise<void> {
+function parseUser(raw: string): User | null {
   try {
-    await AsyncStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(user));
-  } catch (e) {
-    __DEV__ && console.warn('AuthContext: persistUser failed', e);
-    throw new Error('Failed to save session');
-  }
-}
-
-async function getStoredUser(): Promise<User | null> {
-  try {
-    const raw = await AsyncStorage.getItem(AUTH_STORAGE_KEY);
-    if (raw == null) return null;
     const parsed = JSON.parse(raw) as unknown;
     if (
       parsed &&
@@ -67,14 +59,40 @@ async function getStoredUser(): Promise<User | null> {
     ) {
       return parsed as User;
     }
-    await AsyncStorage.removeItem(AUTH_STORAGE_KEY);
-    return null;
   } catch {
-    return null;
+    // ignore
+  }
+  return null;
+}
+
+async function persistUser(user: User): Promise<void> {
+  const payload = JSON.stringify(user);
+  try {
+    await AsyncStorage.setItem(AUTH_STORAGE_KEY, payload);
+  } catch (e) {
+    __DEV__ && console.warn('AuthContext: persistUser failed (using in-memory fallback)', e);
+    memoryFallback = payload;
   }
 }
 
+async function getStoredUser(): Promise<User | null> {
+  try {
+    const raw = await AsyncStorage.getItem(AUTH_STORAGE_KEY);
+    if (raw != null) {
+      const user = parseUser(raw);
+      if (user) return user;
+    }
+  } catch {
+    // Native module may be null; try in-memory fallback
+  }
+  if (memoryFallback != null) {
+    return parseUser(memoryFallback);
+  }
+  return null;
+}
+
 async function clearStoredUser(): Promise<void> {
+  memoryFallback = null;
   try {
     await AsyncStorage.removeItem(AUTH_STORAGE_KEY);
   } catch (e) {
