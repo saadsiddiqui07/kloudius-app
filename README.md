@@ -160,7 +160,22 @@ The UI focuses on:
 
 ## 📸 Demo
 
-(Add screenshots or a short recording here before submission.)
+iOS - https://www.youtube.com/shorts/_9rF6SmWIM8
+
+Android - https://www.youtube.com/shorts/98x2kEizMjU
+
+Note: Videos uploaded to YouTube (unlisted) as the recordings are of high resolution with large file size.
+
+---
+
+## 📸 Screenshots
+
+### iOS
+<img width="190" height="auto" alt="Simulator Screenshot - iPhone 16 Pro - 2026-02-27 at 17 58 43" src="https://github.com/user-attachments/assets/9efdd8a7-db63-4e80-83d1-b8ef3d0d3ab8" /> <img width="190" height="auto" alt="Simulator Screenshot - iPhone 16 Pro - 2026-02-27 at 17 58 31" src="https://github.com/user-attachments/assets/1958b743-c545-4fce-9930-a31b45e07320" /> <img width="190" height="auto" alt="Simulator Screenshot - iPhone 16 Pro - 2026-02-27 at 18 00 05" src="https://github.com/user-attachments/assets/107b8ba2-9e6c-4c22-9138-8ea3ab974eef" /> <img width="190" height="auto" alt="Simulator Screenshot - iPhone 16 Pro - 2026-02-27 at 17 59 32" src="https://github.com/user-attachments/assets/539676f8-a7f7-46d2-a2d7-3fad07b4c0b1" /> <img width="190" height="auto" alt="Simulator Screenshot - iPhone 16 Pro - 2026-02-27 at 18 38 25" src="https://github.com/user-attachments/assets/00cc225a-1a4e-4465-b160-549b9052df35" />
+
+
+### Android
+<img width="190" height="auto" alt="Screenshot_1772195625" src="https://github.com/user-attachments/assets/7c08d188-78ec-4e53-980a-84b1df2b1ac3" /> <img width="190" height="auto" alt="Screenshot_1772195572" src="https://github.com/user-attachments/assets/ee35ebc0-4cdb-4a4e-a19c-c4316315de1c" /> <img width="190" height="auto" alt="Screenshot_1772199120" src="https://github.com/user-attachments/assets/a29e4f50-955b-4bf7-a60f-acedaf870c42" /> <img width="190" height="auto" alt="Screenshot_1772199133" src="https://github.com/user-attachments/assets/12d6d49a-36aa-4d6a-8775-adbffc937b9b" /> <img width="190" height="auto" alt="Screenshot_1772199177" src="https://github.com/user-attachments/assets/22eb8311-f532-4c90-9e5a-efc712eefe39" />
 
 ---
 
@@ -172,6 +187,12 @@ The UI focuses on:
 * Form handling & validation
 * Persistent login sessions
 * Clean architecture and reusable components
+
+---
+
+## ⭐️ Additional feature
+
+#### App also supports realtime dark mode feature 🌙
 
 ---
 
