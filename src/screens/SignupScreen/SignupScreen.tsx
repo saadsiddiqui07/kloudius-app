@@ -6,18 +6,17 @@ import {
   Platform,
   Pressable,
   ScrollView,
-  StyleSheet,
   Text,
 } from 'react-native';
 
-import { AppButton } from '../components/AppButton';
-import { AppInput } from '../components/AppInput';
-import { ErrorText } from '../components/ErrorText';
-import { ScreenContainer } from '../components/ScreenContainer';
-import { useAuth } from '../context/AuthContext';
-import { useTheme } from '../context/ThemeContext';
-import type { RootStackParamList } from '../navigation/AuthNavigator';
-import { fontSize, fontWeight, spacing } from '../theme';
+import { AppButton } from '../../components/AppButton/AppButton';
+import { AppInput } from '../../components/AppInput/AppInput';
+import { ErrorText } from '../../components/ErrorText/ErrorText';
+import { ScreenContainer } from '../../components/ScreenContainer/ScreenContainer';
+import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
+import type { RootStackParamList } from '../../navigation/AuthNavigator';
+import { createSignupScreenStyles } from './styles';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_PASSWORD_LENGTH = 6;
@@ -82,49 +81,7 @@ export function SignupScreen() {
     navigation.navigate('Login');
   }, [navigation, clearAuthError]);
 
-  const styles = React.useMemo(
-    () =>
-      StyleSheet.create({
-        keyboardView: { flex: 1 },
-        scrollContent: {
-          flexGrow: 1,
-          paddingTop: spacing.xxl,
-        },
-        title: {
-          fontSize: fontSize.title2,
-          fontWeight: fontWeight.bold,
-          color: colors.text,
-          marginBottom: spacing.sm,
-        },
-        subtitle: {
-          fontSize: fontSize.body,
-          color: colors.textSecondary,
-          marginBottom: spacing.xxl,
-        },
-        authError: { marginBottom: spacing.md },
-        submitButton: {
-          marginTop: spacing.sm,
-          marginBottom: spacing.xl,
-        },
-        loginRow: {
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-          paddingVertical: spacing.md,
-        },
-        loginRowPressed: { opacity: 0.7 },
-        loginPrompt: {
-          fontSize: fontSize.body,
-          color: colors.textSecondary,
-        },
-        loginLink: {
-          fontSize: fontSize.body,
-          fontWeight: fontWeight.semibold,
-          color: colors.primary,
-        },
-      }),
-    [colors],
-  );
+  const styles = React.useMemo(() => createSignupScreenStyles(colors), [colors]);
 
   return (
     <ScreenContainer>
@@ -210,4 +167,3 @@ export function SignupScreen() {
     </ScreenContainer>
   );
 }
-

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import {
   DefaultTheme,
   NavigationContainer,
@@ -9,9 +9,10 @@ import { enableScreens } from 'react-native-screens';
 
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
-import { HomeScreen } from '../screens/HomeScreen';
-import { LoginScreen } from '../screens/LoginScreen';
-import { SignupScreen } from '../screens/SignupScreen';
+import  HomeScreen  from '../screens/HomeScreen/HomeScreen';
+import { LoginScreen } from '../screens/LoginScreen/LoginScreen';
+import { SignupScreen } from '../screens/SignupScreen/SignupScreen';
+import { styles } from './styles';
 
 enableScreens(true);
 
@@ -39,14 +40,6 @@ function SplashScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  splash: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export function AuthNavigator() {
   const { user, isLoading } = useAuth();

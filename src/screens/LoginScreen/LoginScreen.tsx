@@ -6,18 +6,17 @@ import {
   Platform,
   Pressable,
   ScrollView,
-  StyleSheet,
   Text,
 } from 'react-native';
 
-import { AppButton } from '../src/components/AppButton';
-import { AppInput } from '../src/components/AppInput';
-import { ErrorText } from '../src/components/ErrorText';
-import { ScreenContainer } from '../src/components/ScreenContainer';
-import { useAuth } from '../src/context/AuthContext';
-import { useTheme } from '../src/context/ThemeContext';
-import type { RootStackParamList } from '../src/navigation/AuthNavigator';
-import { fontSize, fontWeight, spacing } from '../src/theme';
+import { AppButton } from '../../components/AppButton/AppButton';
+import { AppInput } from '../../components/AppInput/AppInput';
+import { ErrorText } from '../../components/ErrorText/ErrorText';
+import { ScreenContainer } from '../../components/ScreenContainer/ScreenContainer';
+import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
+import type { RootStackParamList } from '../../navigation/AuthNavigator';
+import { createLoginScreenStyles } from './styles';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -68,49 +67,7 @@ export function LoginScreen() {
     navigation.navigate('Signup');
   }, [navigation, clearAuthError]);
 
-  const styles = React.useMemo(
-    () =>
-      StyleSheet.create({
-        keyboardView: { flex: 1 },
-        scrollContent: {
-          flexGrow: 1,
-          paddingTop: spacing.xxl,
-        },
-        title: {
-          fontSize: fontSize.title2,
-          fontWeight: fontWeight.bold,
-          color: colors.text,
-          marginBottom: spacing.sm,
-        },
-        subtitle: {
-          fontSize: fontSize.body,
-          color: colors.textSecondary,
-          marginBottom: spacing.xxl,
-        },
-        authError: { marginBottom: spacing.md },
-        submitButton: {
-          marginTop: spacing.sm,
-          marginBottom: spacing.xl,
-        },
-        signupRow: {
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-          paddingVertical: spacing.md,
-        },
-        signupRowPressed: { opacity: 0.7 },
-        signupPrompt: {
-          fontSize: fontSize.body,
-          color: colors.textSecondary,
-        },
-        signupLink: {
-          fontSize: fontSize.body,
-          fontWeight: fontWeight.semibold,
-          color: colors.primary,
-        },
-      }),
-    [colors],
-  );
+  const styles = React.useMemo(() => createLoginScreenStyles(colors), [colors]);
 
   return (
     <ScreenContainer>

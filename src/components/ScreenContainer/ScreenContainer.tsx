@@ -1,11 +1,11 @@
-import React from 'react';
-import type { ReactNode } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { useMemo, type ReactNode } from 'react';
+import { View } from 'react-native';
 import type { ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useTheme } from '../context/ThemeContext';
-import { spacing } from '../theme';
+import { useTheme } from '../../context/ThemeContext';
+import { spacing } from '../../theme';
+import { styles } from './styles';
 
 type ScreenContainerProps = {
   children: ReactNode;
@@ -25,7 +25,7 @@ export function ScreenContainer({
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
 
-  const containerStyle = React.useMemo(
+  const containerStyle = useMemo(
     () => [{ backgroundColor: colors.background }, styles.container],
     [colors.background],
   );
@@ -47,9 +47,3 @@ export function ScreenContainer({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
