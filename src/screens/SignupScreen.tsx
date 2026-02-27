@@ -10,14 +10,14 @@ import {
   Text,
 } from 'react-native';
 
-import { AppButton } from '../src/components/AppButton';
-import { AppInput } from '../src/components/AppInput';
-import { ErrorText } from '../src/components/ErrorText';
-import { ScreenContainer } from '../src/components/ScreenContainer';
-import { useAuth } from '../src/context/AuthContext';
-import { useTheme } from '../src/context/ThemeContext';
-import type { RootStackParamList } from '../src/navigation/AuthNavigator';
-import { fontSize, fontWeight, spacing } from '../src/theme';
+import { AppButton } from '../components/AppButton';
+import { AppInput } from '../components/AppInput';
+import { ErrorText } from '../components/ErrorText';
+import { ScreenContainer } from '../components/ScreenContainer';
+import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
+import type { RootStackParamList } from '../navigation/AuthNavigator';
+import { fontSize, fontWeight, spacing } from '../theme';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_PASSWORD_LENGTH = 6;

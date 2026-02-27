@@ -9,9 +9,9 @@ import { enableScreens } from 'react-native-screens';
 
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
-import { HomeScreen } from '../../screens/HomeScreen';
-import { LoginScreen } from '../../screens/LoginScreen';
-import { SignupScreen } from '../../screens/SignupScreen';
+import { HomeScreen } from '../screens/HomeScreen';
+import { LoginScreen } from '../screens/LoginScreen';
+import { SignupScreen } from '../screens/SignupScreen';
 
 enableScreens(true);
 

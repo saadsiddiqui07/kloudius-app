@@ -28,7 +28,7 @@ export function AppInput({
   label,
   error,
   containerStyle,
-  style,
+  // style,
   onFocus,
   onBlur,
   secureTextEntry,
