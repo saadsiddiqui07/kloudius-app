@@ -190,6 +190,12 @@ Note: Videos uploaded to YouTube (unlisted) as the recordings are of high resolu
 
 ---
 
+## ⭐️ Additional feature
+
+#### App also supports realtime dark mode feature 🌙
+
+---
+
 ## 👨‍💻 Author
 
 Built as part of a React Native take-home assignment to showcase clean architecture, UI discipline, and real-world patterns.
