@@ -160,6 +160,12 @@ The UI focuses on:
 
 ## 📸 Demo
 
+iOS - https://www.youtube.com/shorts/_9rF6SmWIM8
+
+Android - https://www.youtube.com/shorts/98x2kEizMjU
+
+Note: Videos uploaded to YouTube (unlisted) as the recordings are of high resolution with large file size.
+
 ---
 
 ## 📸 Screenshots
