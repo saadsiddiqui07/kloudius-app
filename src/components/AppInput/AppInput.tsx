@@ -11,7 +11,7 @@ import {
 import { useTheme } from '../../context/ThemeContext';
 import { EyeIcon } from '../icons/EyeIcon';
 import { EyeOffIcon } from '../icons/EyeOffIcon';
-import { ErrorText } from '../ErrorText/ErrorText';
+import { ErrorText }  from '../ErrorText/ErrorText';
 import {
   createAppInputStyles,
   TOGGLE_ICON_SIZE,
@@ -23,7 +23,7 @@ type AppInputProps = TextInputProps & {
   containerStyle?: ViewStyle;
 };
 
-export function AppInput({
+const AppInput = ({
   label,
   error,
   containerStyle,
@@ -32,7 +32,7 @@ export function AppInput({
   onBlur,
   secureTextEntry,
   ...rest
-}: AppInputProps) {
+}: AppInputProps) => {
   const { colors, shadows } = useTheme();
   const [focused, setFocused] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -104,3 +104,5 @@ export function AppInput({
     </View>
   );
 }
+
+export default AppInput;

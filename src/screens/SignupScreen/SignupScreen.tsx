@@ -9,10 +9,10 @@ import {
   Text,
 } from 'react-native';
 
-import { AppButton } from '../../components/AppButton/AppButton';
-import { AppInput } from '../../components/AppInput/AppInput';
+import AppButton from '../../components/AppButton/AppButton';
+import AppInput from '../../components/AppInput/AppInput';
 import { ErrorText } from '../../components/ErrorText/ErrorText';
-import { ScreenContainer } from '../../components/ScreenContainer/ScreenContainer';
+import ScreenContainer from '../../components/ScreenContainer/ScreenContainer';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import type { RootStackParamList } from '../../navigation/AuthNavigator';
@@ -21,7 +21,10 @@ import { createSignupScreenStyles } from './styles';
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_PASSWORD_LENGTH = 6;
 
-type SignupNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Signup'>;
+type SignupNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'Signup'
+>;
 
 export function SignupScreen() {
   const navigation = useNavigation<SignupNavigationProp>();
@@ -81,7 +84,10 @@ export function SignupScreen() {
     navigation.navigate('Login');
   }, [navigation, clearAuthError]);
 
-  const styles = React.useMemo(() => createSignupScreenStyles(colors), [colors]);
+  const styles = React.useMemo(
+    () => createSignupScreenStyles(colors),
+    [colors],
+  );
 
   return (
     <ScreenContainer>
@@ -101,7 +107,7 @@ export function SignupScreen() {
             label="Name"
             placeholder="Your name"
             value={name}
-            onChangeText={(text) => {
+            onChangeText={text => {
               setName(text);
               if (nameError) setNameError(null);
             }}
@@ -115,7 +121,7 @@ export function SignupScreen() {
             label="Email"
             placeholder="you@example.com"
             value={email}
-            onChangeText={(text) => {
+            onChangeText={text => {
               setEmail(text);
               if (emailError) setEmailError(null);
             }}
@@ -131,7 +137,7 @@ export function SignupScreen() {
             label="Password"
             placeholder="At least 6 characters"
             value={password}
-            onChangeText={(text) => {
+            onChangeText={text => {
               setPassword(text);
               if (passwordError) setPasswordError(null);
             }}
@@ -155,7 +161,10 @@ export function SignupScreen() {
           <Pressable
             onPress={goToLogin}
             disabled={isAuthenticating}
-            style={({ pressed }) => [styles.loginRow, pressed && styles.loginRowPressed]}
+            style={({ pressed }) => [
+              styles.loginRow,
+              pressed && styles.loginRowPressed,
+            ]}
             accessibilityRole="button"
             accessibilityLabel="Go to log in"
           >

@@ -1,11 +1,11 @@
 import React, { useCallback, useMemo } from 'react';
 import { Text, View } from 'react-native';
 
-import { AppButton } from '../../components';
-import { ScreenContainer } from '../../components/ScreenContainer/ScreenContainer';
+import ScreenContainer from '../../components/ScreenContainer/ScreenContainer';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import { createHomeScreenStyles } from './styles';
+import AppButton from '../../components/AppButton/AppButton';
 
 const HomeScreen = () => {
   const { colors } = useTheme();

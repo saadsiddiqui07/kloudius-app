@@ -18,14 +18,14 @@ type AppButtonProps = {
   style?: ViewStyle;
 };
 
-export function AppButton({
+const AppButton = ({
   title,
   onPress,
   disabled = false,
   loading = false,
   variant = 'primary',
   style,
-}: AppButtonProps) {
+}: AppButtonProps) => {
   const { colors, shadows } = useTheme();
   const isDisabled = disabled || loading;
 
@@ -66,3 +66,5 @@ export function AppButton({
     </Pressable>
   );
 }
+
+export default AppButton;

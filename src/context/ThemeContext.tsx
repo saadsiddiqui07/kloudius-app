@@ -21,7 +21,7 @@ type ThemeProviderProps = {
   children: ReactNode;
 };
 
-export function ThemeProvider({ children }: ThemeProviderProps) {
+export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const isDark = useColorScheme() === 'dark';
   const colors = isDark ? darkColors : lightColors;
   const shadows = useMemo(() => getShadows(colors), [colors]);

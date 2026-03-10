@@ -35,19 +35,19 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 const MOCK_DELAY_MS = 400;
 
-function mockDelay(ms: number = MOCK_DELAY_MS): Promise<void> {
+const mockDelay = (ms: number = MOCK_DELAY_MS): Promise<void> => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function validateEmail(email: string): boolean {
+const validateEmail = (email: string): boolean => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 }
 
-function validatePassword(password: string): boolean {
+const validatePassword = (password: string): boolean => {
   return typeof password === 'string' && password.length >= 6;
 }
 
-function parseUser(raw: string): User | null {
+const parseUser = (raw: string): User | null => {
   try {
     const parsed = JSON.parse(raw) as unknown;
     if (

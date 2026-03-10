@@ -15,13 +15,13 @@ type ScreenContainerProps = {
   bottomPadding?: number;
 };
 
-export function ScreenContainer({
+const  ScreenContainer = ({
   children,
   style,
   horizontalPadding = spacing.screen,
   topPadding = spacing.xxl,
   bottomPadding = spacing.xxl,
-}: ScreenContainerProps) {
+}: ScreenContainerProps) => {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
 
@@ -47,3 +47,5 @@ export function ScreenContainer({
     </View>
   );
 }
+
+export default ScreenContainer;

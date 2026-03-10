@@ -9,10 +9,10 @@ import {
   Text,
 } from 'react-native';
 
-import { AppButton } from '../../components/AppButton/AppButton';
-import { AppInput } from '../../components/AppInput/AppInput';
+import  AppButton  from '../../components/AppButton/AppButton';
+import  AppInput  from '../../components/AppInput/AppInput';
 import { ErrorText } from '../../components/ErrorText/ErrorText';
-import { ScreenContainer } from '../../components/ScreenContainer/ScreenContainer';
+import  ScreenContainer  from '../../components/ScreenContainer/ScreenContainer';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import type { RootStackParamList } from '../../navigation/AuthNavigator';
